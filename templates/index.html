@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
+            <ul class="hide_nav"> <!-- hide this nav bar if in the phone -->
+                <li><a href='/'>Home</a></li>
+                <li><a href='/recipe/'>Recipe</a></li>
+                <li><a href='/Blog/'>Blog</a></li>
+                <li><a href='/contact/'>Contact</a></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col">
+                <h1>“Sunrise Smiles Begin at the Table”</h1>
+                <a href='#'>Book Us</a>
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/pic1.png')}}" class="feature-img">
+            <div class="pad-top"> <!-- we add top padding here -->
+                <img src="{{ url_for('static', filename='images/pic2.png')}}" class="thumbnail-img">
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

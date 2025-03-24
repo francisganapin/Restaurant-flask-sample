@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
+            <ul>
+                <li><a href='/'>Home</a></li>
+                <li><a href='/recipe/'>Recipe</a></li>
+                <li><a href='/Book/'>Book</a></li>
+                <li><a href='/contact/'>Contact</a></li>
+            </ul>
+
+        </nav>
+        <div class="row">
+
+            <div class="col">
+                <h1>Green Beans with Bacon and New Potatoes</h1>
+                <p><strong>Serves:</strong> 4</p>
+                <h2>Ingredients:</h2>
+                <ul>
+                    <li>4 slices bacon</li>
+                    <li>1 medium onion, chopped (scrubbed clean with a vegetable brush under running water)</li>
+                    <li>2 lbs fresh green beans, snapped (gently rubbed under cold running water)</li>
+                    <li>8 small new potatoes, halved (scrubbed clean with a vegetable brush under running water)</li>
+                    <li>1/8 tsp salt</li>
+                    <li>1/8 tsp pepper</li>
+                </ul>
+            </div>
+    </div>
+</body>
+</html>
