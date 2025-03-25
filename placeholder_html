@@ -1,0 +1,25 @@
+<!-- Modal Container -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Schedule Your Time</h2>
+    </div>
+    <div class="modal-body">
+      <form>
+        <!-- Date Input -->
+        <label for="modal-date">Select a date:</label>
+        <input type="date" id="modal-date" name="modal-date" required>
+        <br><br>
+
+        <!-- Time Input -->
+        <label for="modal-time">Select a time:</label>
+        <input type="time" id="modal-time" name="modal-time" required>
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
