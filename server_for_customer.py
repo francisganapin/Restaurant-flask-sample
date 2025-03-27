@@ -17,16 +17,18 @@ class Booking(db.Model):
         return f'<Booking {self.select_date} {self.select_time}>'
 
 
+
 class Contact(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     first_name = db.Column(db.String(20),nullable=False)
     last_name = db.Column(db.String(20),nullable=False)
     email = db.Column(db.String(45),nullable=False)
-    location = db.Column(db.String(150),nullable=False)
+    occasion = db.Column(db.String(150),nullable=False)
     phone_number = db.Column(db.String(15), nullable=False)
 
     def __repr__(self):
         return f'<Contact {self.name}>'
+    
 # Ensure the database is created
 with app.app_context():
     db.create_all()
@@ -43,7 +45,7 @@ def index():
             db.session.commit()
             print("Booking saved:", select_date, select_time)
 
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/recipe/')
 def recipe():
@@ -55,18 +57,18 @@ def contact():
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
         email =  request.form.get('get_email')
-        location = request.form.get('location')
+        occasion = request.form.get('occasion')
         phone_number = request.form.get('phone_number')
 
         contact_data = Contact(first_name=first_name,
                                last_name=last_name,
                                email=email,
-                               location=location,
+                               occasion=occasion,
                                phone_number = phone_number
                                )
         db.session.add(contact_data)
         db.session.commit()
-        print('Conctact save:',first_name,last_name,email,location,phone_number)
+        print('Conctact save:',first_name,last_name,email,occasion,phone_number)
 
     return render_template('contact.html')
 

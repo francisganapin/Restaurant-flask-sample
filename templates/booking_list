@@ -1,0 +1,25 @@
+
+
+
+<table>
+    <thead>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Occasion</td>
+            <td>Phone</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in contact_list_data %}
+        <tr>
+          <td>{{item.first_name}}</td>
+          <td>{{item.last_name}}</td>  
+          <td>{{item.email}}</td>  
+          <td>{{item.occasion}}</td>    
+          <td>{{item.phone_number}}</td>  
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
