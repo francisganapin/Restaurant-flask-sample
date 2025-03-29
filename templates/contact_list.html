@@ -1,25 +1,67 @@
 
+<style>
+    .table_div{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:50vh;
+        margin:0;
+    }
 
+</style>
+<body>
 
-<table>
-    <thead>
-        <tr>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Email</td>
-            <td>Occasion</td>
-            <td>Phone</td>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in contact_list_data %}
-        <tr>
-          <td>{{item.first_name}}</td>
-          <td>{{item.last_name}}</td>  
-          <td>{{item.email}}</td>  
-          <td>{{item.occasion}}</td>    
-          <td>{{item.phone_number}}</td>  
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<form action="/contact_list/" method="POST">
+    <div>
+        <p>Name</p><br>
+        <input type='text' name="query_name">
+        <p>Email</p><br>
+        <input type='text' name="query_email">
+        <p>Occasion</p><br>
+        <select id="occasion" name="query_occasion">
+            <option value="Wedding">Wedding</option>
+            <option value="Birthday">Birthday</option>
+            <option value="None">None</option>
+        </select>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+    <div class="table_div">
+
+        <table>
+            <thead>
+                <tr>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Email</td>
+                    <td>Occasion</td>
+                    <td>Phone</td>
+                    <td>Time</td>
+                    <td>Date</td>
+                </tr>
+            </thead>
+        <tbody>
+                {% for item in contact_list_data %}
+                <tr>
+                    <td>{{item.first_name}}</td>
+                    <td>{{item.last_name}}</td>  
+                    <td>{{item.email}}</td>  
+                    <td>{{item.occasion}}</td>    
+                    <td>{{item.phone_number}}</td>  
+                    <td>{{item.time_input}}</td>
+                    <td>{{item.date_input}}</td>
+                </tr>
+                {% else %}
+
+                <tr>
+                    <td>No Data Found </td>
+                    <td>Sorry for that </td>
+                </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+</body>

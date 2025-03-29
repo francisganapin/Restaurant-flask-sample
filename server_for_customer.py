@@ -2,6 +2,15 @@ from flask import Flask, render_template, request
 import webbrowser
 from flask_sqlalchemy import SQLAlchemy
 
+from datetime import datetime
+
+now = datetime.now()
+
+#save this for our database contact
+current_date = now.strftime("%m-%d-%y")
+# save this as time for database contact 
+current_time = now.strftime("%H:%M:%S")
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
@@ -25,6 +34,8 @@ class Contact(db.Model):
     email = db.Column(db.String(45),nullable=False)
     occasion = db.Column(db.String(150),nullable=False)
     phone_number = db.Column(db.String(15), nullable=False)
+    time_input = db.Column(db.String(255),nullable=False)
+    date_input = db.Column(db.String(255),nullable=False)
 
     def __repr__(self):
         return f'<Contact {self.name}>'
@@ -64,11 +75,14 @@ def contact():
                                last_name=last_name,
                                email=email,
                                occasion=occasion,
-                               phone_number = phone_number
+                               phone_number = phone_number,
+                               time_input=current_time,
+                               date_input=current_date
+
                                )
         db.session.add(contact_data)
         db.session.commit()
-        print('Conctact save:',first_name,last_name,email,occasion,phone_number)
+        print('Conctact save:',first_name,last_name,email,occasion,phone_number,current_time,current_date)
 
     return render_template('contact.html')
 
