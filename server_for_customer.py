@@ -56,11 +56,11 @@ def index():
             db.session.commit()
             print("Booking saved:", select_date, select_time)
 
-    return render_template('home.html')
+    return render_template('website_template/home.html')
 
 @app.route('/recipe/')
 def recipe():
-    return render_template('recipe.html')
+    return render_template('website_template/recipe.html')
 
 @app.route('/contact/',methods=['GET','POST'])
 def contact():
@@ -84,12 +84,13 @@ def contact():
         db.session.commit()
         print('Conctact save:',first_name,last_name,email,occasion,phone_number,current_time,current_date)
 
-    return render_template('contact.html')
+    return render_template('website_template/contact.html')
 
 @app.route('/blog/')
 def blog():
     return render_template('blog.html')
 
 if __name__ == '__main__':
-    webbrowser.open("http://127.0.0.1:5000/home/")
     app.run(debug=True)
+    webbrowser.open("http://127.0.0.1:5000/home/")
+    
