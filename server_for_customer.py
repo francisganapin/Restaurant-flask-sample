@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,url_for,redirect
+
+
 import webbrowser
 from flask_sqlalchemy import SQLAlchemy
 
@@ -19,8 +21,10 @@ db = SQLAlchemy(app)
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    id_card = db.Column(db.String(27),nullable=False)
     select_date = db.Column(db.String(20))
     select_time = db.Column(db.String(20))
+    status     = db.Column(db.String(20),nullable=False)
 
     def __repr__(self):
         return f'<Booking {self.select_date} {self.select_time}>'
@@ -44,14 +48,21 @@ class Contact(db.Model):
 with app.app_context():
     db.create_all()
 
+#id card should valid before we can book 
 @app.route('/home/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        select_id_card = request.form.get('select_id_card')
         select_date = request.form.get('select_date')
         select_time = request.form.get('select_time')
+        status = 'Pending'
 
         if select_date and select_time:
-            booking_data = Booking(select_date=select_date, select_time=select_time)
+            booking_data = Booking(select_date=select_date, 
+                                   select_time=select_time,
+                                   id_card=select_id_card,
+                                   status=status
+                                   )
             db.session.add(booking_data)
             db.session.commit()
             print("Booking saved:", select_date, select_time)
@@ -82,15 +93,27 @@ def contact():
                                )
         db.session.add(contact_data)
         db.session.commit()
+        
         print('Conctact save:',first_name,last_name,email,occasion,phone_number,current_time,current_date)
-
+        return redirect(url_for('success',first_name=first_name,last_name=last_name,occasion=occasion))
+    
     return render_template('website_template/contact.html')
+
+
+@app.route('/contact/succes/')
+def success():
+    first_name = request.args.get('first_name')
+    last_name = request.args.get('last_name')
+    occasion = request.args.get('occasion')
+
+    print(f"Contact saved! Name:{first_name},{last_name} Occasion:{occasion} thank your for contact us")
+    return render_template('website_template/success.html',first_name=first_name,last_name=last_name,occasion=occasion)
 
 @app.route('/blog/')
 def blog():
     return render_template('blog.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
     webbrowser.open("http://127.0.0.1:5000/home/")
-    
+    app.run(host='0.0.0.0', port=5000, debug=True)
+

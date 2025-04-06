@@ -1,124 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>recipe</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">  <!-- ✅ Correct linking -->
+{% extends "base_customer.html" %}
 
-    <style>
-    .container {
-    display: flex;
-    width: 80%;
-    max-width: 1000px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-.input-group {
-    display: flex;
-    gap: 10px;
-}
+{% block title %}Contact Page{% endblock %}
 
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+{% block content %}
 
-.div_form_container{
-  margin:auto;
-  width: 100%;
-  padding-top:100px;
+        
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">  <!-- ✅ Correct linking -->
 
-}
-    </style>
-</head>
-<body>
-    <div class="hero">
-        <nav>
-            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
-            <ul>
-                <li><a href='/home/'>Home</a></li>
-                <li><a href='/recipe/'>Recipe</a></li>
-                <li><a href='/book/'>Book</a></li>
-                <li><a href='/contact/'>Contact</a></li>
-            </ul>
+<div class="div_form_container">
+    <div class="container">
+        <!-- Title section -->
+        <div class="title">Contact</div>
+        <div class="content">
+          <!-- Registration form -->
+          <form action="/contact/" method="POST">
+            <div class="user-details">
+              <!-- Input for Full Name -->
+              <div class="input-box">
+                <span class="details">First Name</span>
+                <input type="text" placeholder="Enter your name" name="first_name" required>
+              </div>
+              <!-- Input for Username -->
+              <div class="input-box">
+                <span class="details">Last Name</span>
+                <input type="text" placeholder="Enter your username" name="last_name" required>
+              </div>
+              
+              <!-- Input for Email -->
+              <div class="input-box">
+                <span class="details">Email</span>
+                <input type="text" placeholder="Enter your email" name="get_email" required>
+              </div>
+              <!-- Input for Phone Number -->
+              <div class="input-box">
+                <span class="details">Phone Number</span>
+                <input type="text" placeholder="Enter your number" name="phone_number" required>
+              </div>
+              <!-- Input for Password -->
+            </div>
 
-        </nav>
-              <div class="div_form_container">
-                  <div class="container">
-                      <!-- Title section -->
-                      <div class="title">Contact</div>
-                      <div class="content">
-                        <!-- Registration form -->
-                        <form action="/contact/" method="POST">
-                          <div class="user-details">
-                            <!-- Input for Full Name -->
-                            <div class="input-box">
-                              <span class="details">First Name</span>
-                              <input type="text" placeholder="Enter your name" name="first_name" required>
-                            </div>
-                            <!-- Input for Username -->
-                            <div class="input-box">
-                              <span class="details">Last Name</span>
-                              <input type="text" placeholder="Enter your username" name="last_name" required>
-                            </div>
-                            
-                            <!-- Input for Email -->
-                            <div class="input-box">
-                              <span class="details">Email</span>
-                              <input type="text" placeholder="Enter your email" name="get_email" required>
-                            </div>
-                            <!-- Input for Phone Number -->
-                            <div class="input-box">
-                              <span class="details">Phone Number</span>
-                              <input type="text" placeholder="Enter your number" name="phone_number" required>
-                            </div>
-                            <!-- Input for Password -->
-                          </div>
+            <div class="gender-details">
+              <!-- Radio buttons for gender selection -->
+              <input type="radio" name="occasion" id="dot-1" value="None">
+              <input type="radio" name="occasion" id="dot-2" value="Birthday">
+              <input type="radio" name="occasion" id="dot-3"  value="Wedding">
+              <input type="radio" name="occasion" id="dot-4"  value="Meeting">
+              <span class="gender-title">Occasion</span>
+              <div class="category">
+                <!-- Label for Male -->
+                <label for="dot-1">
+                  <span class="dot one"></span>
+                  <span class="occasion">None</span>
+                </label>
+                <!-- Label for Female -->
+                <label for="dot-2">
+                  <span class="dot two"></span>
+                  <span class="occasion">Birthday</span>
+                </label>
+                <!-- Label for Prefer not to say -->
+                <label for="dot-3">
+                  <span class="dot three"></span>
+                  <span class="occasion">Wedding</span>
+                </label>
+                <!--- Meeting-->
+                <label for="dot-4">
+                  <span class="dot four"></span>
+                  <span class="occasion">Meeting</span>
+                </label>
+              </div>
+            </div>
+            <!-- Submit button -->
+            <div class="button">
+              <input type="submit" value="Contact Now">
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
 
-                          <div class="gender-details">
-                            <!-- Radio buttons for gender selection -->
-                            <input type="radio" name="occasion" id="dot-1" value="None">
-                            <input type="radio" name="occasion" id="dot-2" value="Birthday">
-                            <input type="radio" name="occasion" id="dot-3"  value="Wedding">
-                            <input type="radio" name="occasion" id="dot-4"  value="Meeting">
-                            <span class="gender-title">Occasion</span>
-                            <div class="category">
-                              <!-- Label for Male -->
-                              <label for="dot-1">
-                                <span class="dot one"></span>
-                                <span class="occasion">None</span>
-                              </label>
-                              <!-- Label for Female -->
-                              <label for="dot-2">
-                                <span class="dot two"></span>
-                                <span class="occasion">Birthday</span>
-                              </label>
-                              <!-- Label for Prefer not to say -->
-                              <label for="dot-3">
-                                <span class="dot three"></span>
-                                <span class="occasion">Wedding</span>
-                              </label>
-                              <!--- Meeting-->
-                              <label for="dot-4">
-                                <span class="dot four"></span>
-                                <span class="occasion">Meeting</span>
-                              </label>
-                            </div>
-                          </div>
-                          <!-- Submit button -->
-                          <div class="button">
-                            <input type="submit" value="Contact Now">
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                </div>
-</body>
-</html>
+
+  {% endblock %}
