@@ -99,6 +99,7 @@ def contact():
     
     return render_template('website_template/contact.html')
 
+<<<<<<< HEAD
 
 @app.route('/contact/succes/')
 def success():
@@ -108,12 +109,21 @@ def success():
 
     print(f"Contact saved! Name:{first_name},{last_name} Occasion:{occasion} thank your for contact us")
     return render_template('website_template/success.html',first_name=first_name,last_name=last_name,occasion=occasion)
+=======
+    return render_template('website_template/contact.html')
+>>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
 
 @app.route('/blog/')
 def blog():
     return render_template('blog.html')
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     webbrowser.open("http://127.0.0.1:5000/home/")
     app.run(host='0.0.0.0', port=5000, debug=True)
 
+=======
+    app.run(debug=True)
+    webbrowser.open("http://127.0.0.1:5000/home/")
+    
+>>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
