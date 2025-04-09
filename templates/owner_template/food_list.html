@@ -1,0 +1,64 @@
+{% extends "base_owner.html" %}
+
+{% block title %}Food List Page{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="display_form"> 
+            <form action="/food_stock/" method="POST" class="form-container">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="query_name">
+                </div>
+    
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="category" name="query_category">
+                        <option value="">--- Select Category ---</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Vegetable">Vegetable</option>
+                        <option value="All">All</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Search</button>
+            </form>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in stock_list %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" style="text-align: center; font-weight: bold; color: red;">No Data Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<<<<<<< HEAD
+
+{% endblock %}
+=======
+>>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">  <!-- ✅ Correct linking -->
+   
+</head>
+
+
+
+
+<body>
+    <div class="hero">
+        <nav>
+            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
+            <ul class="hide_nav"> <!-- hide this nav bar if in the phone -->
+                <li><a href='/home/'>Home</a></li>
+                <li><a href='/recipe/'>Recipe</a></li>
+                <li><a href='/book/'>Book</a></li>
+                <li><a href='/contact/'>Contact</a></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col">
+                <h1>“Sunrise Smiles Begin at the Table”</h1>
+                <a id="myBtn">Book Us</a>
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/pic1.png')}}" class="feature-img">
+            <div class="pad-top"> <!-- we add top padding here -->
+                <img src="{{ url_for('static', filename='images/pic2.png')}}" class="thumbnail-img">
+            </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal Container -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Schedule Your Time</h2>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+            <!-- Date Input -->
+
+            <label for="modal-date">Your ID Card</label>
+            <input type="text" id="modal-date" name="select_id_card" required>
+          
+
+
+            <label for="modal-date">Select a date:</label>
+            <input type="date" id="modal-date" name="select_date" required>
+        
+        
+            <!-- Time Input -->
+            <label for="modal-time">Select a time:</label>
+            <input type="time" id="modal-time" name="select_time" required>
+        
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+  
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+  
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+  
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+  
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+
+
+
+</body>
+</html>
+

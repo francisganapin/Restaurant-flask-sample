@@ -1,0 +1,21 @@
+{% extends "base_customer.html" %}
+
+{% block title %}Contact Page{% endblock %}
+
+{% block content %}
+<style>
+    main {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 10vh;
+    flex-direction: column; 
+}
+
+</style>
+        
+        <p>{{first_name}}</p>
+        <p>{{last_name}}</p>
+        <p>{{occasion}}</p>
+
+{% endblock %}
