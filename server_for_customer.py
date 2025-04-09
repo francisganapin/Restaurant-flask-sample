@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
 
 db = SQLAlchemy(app)
 
-class Booking(db.Model):
+class BookingTb(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_card = db.Column(db.String(27),nullable=False)
     select_date = db.Column(db.String(20))
@@ -30,8 +30,7 @@ class Booking(db.Model):
         return f'<Booking {self.select_date} {self.select_time}>'
 
 
-
-class Contact(db.Model):
+class ContactTb(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     first_name = db.Column(db.String(20),nullable=False)
     last_name = db.Column(db.String(20),nullable=False)
@@ -58,7 +57,7 @@ def index():
         status = 'Pending'
 
         if select_date and select_time:
-            booking_data = Booking(select_date=select_date, 
+            booking_data = BookingTb(select_date=select_date, 
                                    select_time=select_time,
                                    id_card=select_id_card,
                                    status=status
@@ -82,7 +81,7 @@ def contact():
         occasion = request.form.get('occasion')
         phone_number = request.form.get('phone_number')
 
-        contact_data = Contact(first_name=first_name,
+        contact_data = ContactTb(first_name=first_name,
                                last_name=last_name,
                                email=email,
                                occasion=occasion,

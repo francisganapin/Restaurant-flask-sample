@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash,get_flashed_messages
 import webbrowser
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
 
 db = SQLAlchemy(app)
 
-class Booking_Tb(db.Model):
+class BookingTb(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_card = db.Column(db.String(27),nullable=False)
     select_date = db.Column(db.String(20))
@@ -29,7 +29,7 @@ class Booking_Tb(db.Model):
 
 
 
-class Contact_Tb(db.Model):
+class ContactTb(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     first_name = db.Column(db.String(20),nullable=False)
     last_name = db.Column(db.String(20),nullable=False)
@@ -40,11 +40,11 @@ class Contact_Tb(db.Model):
     date_input = db.Column(db.String(255),nullable=False)
 
     def __repr__(self):
-        return f'<Contact {self.name}>'
+        return f'<Contact {self.first_name},{self.last_name}>'
 
 class Food_stock(db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(25),nullable=False)
+    name = db.Column(db.String(25),nullable=False,unique=True)
     category = db.Column(db.String(25),nullable=False)
     quantity = db.Column(db.Integer,nullable=False)
     price = db.Column(db.Integer,nullable=False)
@@ -81,46 +81,90 @@ def register_customer():
 
 @app.route('/food_stock/',methods=['GET','POST'])
 def food_list():
-    stock_list_data = Food_stock.query
+
+    page = request.args.get('page',1,type=int)
+
+    query = Food_stock.query
 
     if request.method == 'POST':
         query_name = request.form.get('query_name', '').strip()
         query_category = request.form.get('query_category', '').strip()
 
         if  query_name:
-            stock_list_data = stock_list_data.filter(Food_stock.name.ilike(f'%{query_name}%'))
+            query = query.filter(Food_stock.name.ilike(f'%{query_name}%'))
 
        
         if query_category and query_category != 'All':
-            stock_list_data = stock_list_data.filter_by(category=query_category)
-       
+            query = query.filter_by(category=query_category)
+
+    stock_list_data = query.paginate(page=page,per_page=6,error_out=False)
+
     return render_template('owner_template/food_list.html',stock_list=stock_list_data)
+
+# add front end message handler  4/9/2025
+@app.route('/food_stock/add/',methods=['GET','POST'])
+def add_food_stock():
+    message = ''
+    if request.method == 'POST':
+        try:
+            name = request.form.get('food_name')
+            category = request.form.get('food_category')
+            quantity = request.form.get('food_quantity')
+            price = request.form.get('food_price')
+
+            print(name,category,quantity,price)
+
+            new_food = Food_stock(name=name,
+                                category=category,
+                                quantity=quantity,
+                                price=price)
+            print(new_food)
+            db.session.add(new_food)
+            db.session.commit()
+            flash('food was added succesfuly')
+        except Exception as e:
+            flash('sorry duplicate Name for Foods')
+            print(f'name was duplicate sorry {e}')
+
+    return redirect(url_for('food_list',message=message))
+
 
 
 
 @app.route('/contact_list/', methods=['GET', 'POST'])
 def booking_list():
-    contact_list_data = Contact_Tb.query
+    
+    # set the page where we at
+    page = request.args.get('page',1,type=int) 
+    
+    query = ContactTb.query
 
     if request.method == 'POST':
         query_name = request.form.get('query_name')
-        query_email = request.form.get('email')
+        query_email = request.form.get('query_email')
         query_occasion = request.form.get('query_occasion')
 
+        print(query_name)
+        result = query.all()
+        print(result)
+
         if query_name:
-            contact_list_data = contact_list_data.filter(
-                Contact_Tb.first_name.ilike(f'%{query_name}%'),
-                Contact_Tb.last_name.ilike(f'%{query_name}%')
-                )
+            query = query.filter(
+                db.or_(ContactTb.first_name.ilike(f'%{query_name}%'),
+                ContactTb.last_name.ilike(f'%{query_name}%')
+                ))
                 
         if query_email:
-            contact_list_data = contact_list_data.filter(
-                Contact_Tb.email.ilike(f'%{query_email}%')
+            query = query.filter(
+                ContactTb.email.ilike(f'%{query_email}%')
                 )
 
         if query_occasion and query_occasion != 'All':
-            contact_list_data = contact_list_data.filter_by(occasion=query_occasion)
-
+            contact_list_data = query.filter_by(occasion=query_occasion)
+    
+    contact_list_data = query.paginate(page=page,per_page=6,error_out=False)
+    
+    print(contact_list_data)
     return render_template('owner_template/contact_list.html',contact_list_data=contact_list_data)
 
 
