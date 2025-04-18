@@ -129,7 +129,26 @@ def add_food_stock():
     return redirect(url_for('food_list',message=message))
 
 
+@app.route('/food_stock/upate/<int:id>',methods=['GET','POST'])
+def update_food_stock(id):
+    message = ''
+    food = Food_stock.query.get_or_404(id)
+    if request.method == 'POST':
+        try:
+            quantity = request.form.get('food_quantity')
+            price = request.form.get('food_price')
 
+        
+            food.quantity = quantity
+            food.price = price
+           
+            db.session.commit()
+            flash('Food was updated successfuly')
+        except Exception as e:
+            db.session.rollback()
+            flash('sorry duplicate Name for Foods')
+            print(f'name was duplicate sorry{e}')
+    return redirect(url_for('food_list',message=message))
 
 @app.route('/contact_list/', methods=['GET', 'POST'])
 def booking_list():
