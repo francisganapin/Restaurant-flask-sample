@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a6e1b0b (4/22/2025)
 {% extends "base_owner.html" %}
 
 {% block title %}Food List Page{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 =======
 <!DOCTYPE html>
 <html lang="en">
@@ -166,6 +170,100 @@
     <div class="container">
         <div class="display_form"> 
             <form action="/food_stock/" method="POST" class="form-container">
+=======
+<style>
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    </style>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" id="myModal">
+      <span class="close">&times;</span>
+      <form action="/food_stock/add/" method="POST" class="form-container">
+
+      <label>Name</label><br>
+      <input name="food_name"><br>
+      
+      <label>Category</label><br>
+      <select id="category" name="food_category"><br>
+        <option value="">--- Select Category ---</option>
+        <option value="All">All</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Fruit">Fruits</option>
+        <option value="Grain">Grain</option>
+        <option value="Meat">Meat</option>
+        <option value="Seafood">Seafood</option>
+        <option value="Vegetable">Vegetable</option>
+    </select><br>
+
+      <label>Quantity</label><br>
+      <input text="number" name="food_quantity"><br>
+
+      <label>Price</label><br>
+      <input type="number" name="food_price"><br>
+      <button type="submit">Submit</button>
+      </form>
+    </div>
+  
+</div>
+
+  
+    <div class="container"> 
+        <button id="myBtn" class="submit-btn" >Add</button>
+        <button type="submit" class="submit-btn">Update</button>
+
+
+        <div class="display_form"> 
+        
+             
+            <form action="/food_stock/" method="POST" class="form-container">
+
+
+               
+
+
+                
+>>>>>>> a6e1b0b (4/22/2025)
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="query_name">
@@ -175,6 +273,7 @@
                     <label>Category</label>
                     <select id="category" name="query_category">
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <option value="">--- Select Category ---</option>
 =======
 >>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
@@ -182,10 +281,24 @@
                         <option value="Fruits">Fruits</option>
                         <option value="Vegetable">Vegetable</option>
                         <option value="All">All</option>
+=======
+                        <option value="">--- Select Category ---</option>
+                        <option value="All">All</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Fruit">Fruits</option>
+                        <option value="Grain">Grain</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Seafood">Seafood</option>
+                        <option value="Vegetable">Vegetable</option>
+>>>>>>> a6e1b0b (4/22/2025)
                     </select>
                 </div>
                 <button type="submit" class="submit-btn">Search</button>
             </form>
+<<<<<<< HEAD
+=======
+       
+>>>>>>> a6e1b0b (4/22/2025)
         </div>
 
         <div class="table_div">
@@ -216,6 +329,7 @@
                 </tbody>
             </table>
         </div>
+<<<<<<< HEAD
     </div>
 </body>
 </html>
@@ -224,3 +338,56 @@
 {% endblock %}
 =======
 >>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
+=======
+{% if stock_list.has_prev %}
+    <a href="{{ url_for('food_list', page=stock_list.prev_num) }}">Previous</a>
+{% endif %}
+
+{% if stock_list.has_next %}
+    <a href="{{ url_for('food_list', page=stock_list.next_num) }}">Next</a>
+{% endif %}
+    </div>
+
+
+    
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        </script>
+    
+       
+       <script>
+        {% for msg in message %}
+            alert("{{msg}}");
+        {% endfor %}
+       </script>
+
+</body>
+
+</html>
+
+{% endblock %}
+>>>>>>> a6e1b0b (4/22/2025)

@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a6e1b0b (4/22/2025)
 {% extends "base_owner.html" %}
 
 {% block title %}Contact Page{% endblock %}
 
 {% block content %}
 
+<<<<<<< HEAD
 =======
 <!DOCTYPE html>
 <html lang="en">
@@ -165,10 +169,18 @@
         <a href="/food_stock/">Stock List</a>
 </div>
 >>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
+=======
+
+
+>>>>>>> a6e1b0b (4/22/2025)
 
     <div class="container">
         <div class="display_form"> 
             <form action="/contact_list/" method="POST" class="form-container">
+<<<<<<< HEAD
+=======
+                {{message}}
+>>>>>>> a6e1b0b (4/22/2025)
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="query_name">
@@ -179,9 +191,12 @@
                     <input type="text" name="query_email">
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
+=======
+>>>>>>> a6e1b0b (4/22/2025)
         
                 <div class="form-group">
                     <label>Occasion</label>
@@ -199,6 +214,11 @@
             <table>
                 <thead>
                     <tr>
+<<<<<<< HEAD
+=======
+                        
+                        <th>Id</th>
+>>>>>>> a6e1b0b (4/22/2025)
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -211,6 +231,10 @@
                 <tbody>
                     {% for item in contact_list_data %}
                     <tr>
+<<<<<<< HEAD
+=======
+                        <td>{{item.id}}</td>
+>>>>>>> a6e1b0b (4/22/2025)
                         <td>{{ item.first_name }}</td>
                         <td>{{ item.last_name }}</td>
                         <td>{{ item.email }}</td>
@@ -227,6 +251,7 @@
                 </tbody>
             </table>
         </div>
+<<<<<<< HEAD
     </div>
 <<<<<<< HEAD
 
@@ -236,3 +261,17 @@
 </body>
 </html>
 >>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
+=======
+{% if contact_list_data.has_prev %}
+    <a href="{{ url_for('booking_list', page=contact_list_data.prev_num) }}">Previous</a>
+{% endif %}
+
+{% if contact_list_data.has_next %}
+    <a href="{{ url_for('booking_list', page=contact_list_data.next_num) }}">Next</a>
+{% endif %}
+
+    </div>
+
+
+{% endblock %}
+>>>>>>> a6e1b0b (4/22/2025)
