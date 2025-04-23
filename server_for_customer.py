@@ -19,11 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
 
 db = SQLAlchemy(app)
 
-<<<<<<< HEAD
-class Booking(db.Model):
-=======
 class BookingTb(db.Model):
->>>>>>> a6e1b0b (4/22/2025)
     id = db.Column(db.Integer, primary_key=True)
     id_card = db.Column(db.String(27),nullable=False)
     select_date = db.Column(db.String(20))
@@ -34,12 +30,7 @@ class BookingTb(db.Model):
         return f'<Booking {self.select_date} {self.select_time}>'
 
 
-<<<<<<< HEAD
-
-class Contact(db.Model):
-=======
 class ContactTb(db.Model):
->>>>>>> a6e1b0b (4/22/2025)
     id = db.Column(db.Integer,primary_key=True)
     first_name = db.Column(db.String(20),nullable=False)
     last_name = db.Column(db.String(20),nullable=False)
@@ -66,11 +57,7 @@ def index():
         status = 'Pending'
 
         if select_date and select_time:
-<<<<<<< HEAD
-            booking_data = Booking(select_date=select_date, 
-=======
             booking_data = BookingTb(select_date=select_date, 
->>>>>>> a6e1b0b (4/22/2025)
                                    select_time=select_time,
                                    id_card=select_id_card,
                                    status=status
@@ -94,11 +81,7 @@ def contact():
         occasion = request.form.get('occasion')
         phone_number = request.form.get('phone_number')
 
-<<<<<<< HEAD
-        contact_data = Contact(first_name=first_name,
-=======
         contact_data = ContactTb(first_name=first_name,
->>>>>>> a6e1b0b (4/22/2025)
                                last_name=last_name,
                                email=email,
                                occasion=occasion,
@@ -115,10 +98,6 @@ def contact():
     
     return render_template('website_template/contact.html')
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> a6e1b0b (4/22/2025)
 
 @app.route('/contact/succes/')
 def success():
@@ -128,30 +107,13 @@ def success():
 
     print(f"Contact saved! Name:{first_name},{last_name} Occasion:{occasion} thank your for contact us")
     return render_template('website_template/success.html',first_name=first_name,last_name=last_name,occasion=occasion)
-<<<<<<< HEAD
-=======
-    return render_template('website_template/contact.html')
->>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
-=======
->>>>>>> a6e1b0b (4/22/2025)
+
 
 @app.route('/blog/')
 def blog():
     return render_template('blog.html')
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-<<<<<<< HEAD
     webbrowser.open("http://127.0.0.1:5000/home/")
     app.run(host='0.0.0.0', port=5000, debug=True)
 
-=======
-    app.run(debug=True)
-    webbrowser.open("http://127.0.0.1:5000/home/")
-    
->>>>>>> 1ccf7231c96113956d0a849f97e9948cc4ab5cec
-=======
-    webbrowser.open("http://127.0.0.1:5000/home/")
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
->>>>>>> a6e1b0b (4/22/2025)

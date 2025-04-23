@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from flask import Flask, render_template, request
-=======
 from flask import Flask, render_template, request,redirect,url_for,flash,get_flashed_messages
->>>>>>> a6e1b0b (4/22/2025)
 import webbrowser
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -42,16 +38,17 @@ class ContactTb(db.Model):
     phone_number = db.Column(db.String(15), nullable=False)
     time_input = db.Column(db.String(255),nullable=False)
     date_input = db.Column(db.String(255),nullable=False)
+    is_archive = db.Column(db.Boolean,default=False)
 
     def __repr__(self):
 
-        return f'<Contact {self.name}>'
-
+        return f'<Contact {self.first_name} - {self.last_name} - {self.occasion} >'
 
 
 class Food_stock(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(25),nullable=False,unique=True)
+
     category = db.Column(db.String(25),nullable=False)
     quantity = db.Column(db.Integer,nullable=False)
     price = db.Column(db.Integer,nullable=False)
@@ -99,6 +96,7 @@ with app.app_context():
 
 
 
+
 @app.route('/register/',methods=['GET','POST'])
 def register_customer():
     
@@ -106,21 +104,6 @@ def register_customer():
 
 
 
-
-
-
-@app.route('/food_stock/',methods=['GET','POST'])
-def food_list():
-
-    page = request.args.get('page',1,type=int)
-
-    query = Food_stock.query
-
-    if request.method == 'POST':
-        query_name = request.form.get('query_name', '').strip()
-        query_category = request.form.get('query_category', '').strip()
-
-        if  query_name:
 
 @app.route('/food_stock/',methods=['GET','POST'])
 def food_list():
@@ -139,38 +122,6 @@ def food_list():
 
     return render_template('owner_template/food_list.html',stock_list=stock_list_data)
 
-
-
-@app.route('/contact_list/', methods=['GET', 'POST'])
-def booking_list():
-    contact_list_data = Contact_Tb.query.all()
-
-    if request.method == 'POST':
-        query_name = request.form.get('query_name')
-        query_email = request.form.get('email')
-        query_occasion = request.form.get('query_occasion')
-
-        if query_name:
-            contact_list_data = Contact_Tb.query
-        if query_email:
-            contact_list_data = contact_list_data.filter(
-                Contact.email.ilike(f'%{query_email}%')
-                )
-
-        if query_occasion:
-            if "All" not in query_occasion:
-                contact_list_data = [ data for data in contact_list_data if query_occasion in data.occasion]
-
-
-            query = query.filter(Food_stock.name.ilike(f'%{query_name}%'))
-
-       
-        if query_category and query_category != 'All':
-            query = query.filter_by(category=query_category)
-
-    stock_list_data = query.paginate(page=page,per_page=6,error_out=False)
-
-    return render_template('owner_template/food_list.html',stock_list=stock_list_data)
 
 # add front end message handler  4/9/2025
 @app.route('/food_stock/add/',methods=['GET','POST'])
@@ -199,6 +150,10 @@ def add_food_stock():
 
     return redirect(url_for('food_list',message=message))
 
+#@app.route('/food_stock/update/id',methods=['GET','POST'])
+
+
+
 
 @app.route('/food_stock/upate/<int:id>',methods=['GET','POST'])
 def update_food_stock(id):
@@ -226,9 +181,10 @@ def booking_list():
     
     # set the page where we at
     page = request.args.get('page',1,type=int) 
-    
-    query = ContactTb.query
+    # only show archive contact
+    query = ContactTb.query.filter(ContactTb.is_archive==False)
 
+    print(query)
     if request.method == 'POST':
         query_name = request.form.get('query_name')
         query_email = request.form.get('query_email')
@@ -258,6 +214,17 @@ def booking_list():
 
     return render_template('owner_template/contact_list.html',contact_list_data=contact_list_data)
 
+
+@app.route('/contact_list/archive/',methods=['GET','POST'])
+def booking_list_archive():
+    
+    if request.method == 'POST':
+        query_id = request.form.get('query_id')
+
+        ContactTb.query.filter_by(id=query_id).update({'is_archive':True})
+        db.session.commit()
+
+    return redirect(url_for('booking_list'))
 
 
 
