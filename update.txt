@@ -1,3 +1,6 @@
+5/8/2025
+	update css style on customer and owner
+
 4/23/2025
     add contact archive so we will hide some cotnact list we dont delete
 

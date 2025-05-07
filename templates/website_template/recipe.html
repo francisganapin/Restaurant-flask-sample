@@ -6,16 +6,23 @@
     <title>recipe</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
 </head>
-<<<<<<< HEAD
-=======
 
 <style>
     .main-title{
         color: #000;
         font-style: italic;
     }
+
+    .thumbnail-img-1{
+    margin-left:100px;
+    width:500px;
+    position:absolute;
+    bottom:10px;
+    left:0;
+    border-radius:8px;
+    box-shadow:5px 8px 10px rgb(0,0,0,0.1);
+}
 </style>
->>>>>>> a6e1b0b (4/22/2025)
 <body>
     <div class="hero">
         <nav>
@@ -30,21 +37,6 @@
         </nav>
         <div class="row">
 
-<<<<<<< HEAD
-            <div class="col">
-                <h1>Green Beans with Bacon and New Potatoes</h1>
-                <p><strong>Serves:</strong> 4</p>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>4 slices bacon</li>
-                    <li>1 medium onion, chopped (scrubbed clean with a vegetable brush under running water)</li>
-                    <li>2 lbs fresh green beans, snapped (gently rubbed under cold running water)</li>
-                    <li>8 small new potatoes, halved (scrubbed clean with a vegetable brush under running water)</li>
-                    <li>1/8 tsp salt</li>
-                    <li>1/8 tsp pepper</li>
-                </ul>
-            </div>
-=======
             <!--ingredients-->
             <div class="col">
                 
@@ -69,9 +61,8 @@
             </div>
 
             <div class="col">
-                
+                <img src="{{url_for('static',filename='images/FOOD.PNG')}}" class="thumbnail-img-1">
             </div>
->>>>>>> a6e1b0b (4/22/2025)
     </div>
 </body>
 </html>
