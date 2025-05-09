@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for,flash,get_flashed_messages
+from flask import Flask, render_template, request,redirect,url_for,flash,get_flashed_messages,jsonify
 import webbrowser
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -227,11 +227,20 @@ def booking_list_archive():
     return redirect(url_for('booking_list'))
 
 
-@app.route
 
+@app.route('/email/send/',methods=['GET','POST'])
+def send_email():
+    if request.method =='POST':
+        query_email = request.form.get('query_email')
+        query_message = request.form.get('querry_message')
+        query_subject = request.form.get('query_subject')
 
-
-
+        print(f'Email: {query_email}')
+        print(f'Subject: {query_subject}')
+        print(f'Message: {query_message}')
+        
+        return jsonify({'email':query_email,'message':query_message,'subject':query_subject})
+    return render_template('owner_template/email_send.html')
 
 if __name__ == '__main__':
     webbrowser.open("http://127.0.0.1:5000/contact_list/")
