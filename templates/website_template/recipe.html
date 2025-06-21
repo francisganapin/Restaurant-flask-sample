@@ -13,15 +13,47 @@
         font-style: italic;
     }
 
+    .row{
+        display:flex;
+        flex-wrap:wrap;
+        padding:20px;
+    }
+    .col{
+        flex:1;
+        padding:10px;
+    }
+
     .thumbnail-img-1{
-    margin-left:100px;
-    width:500px;
-    position:absolute;
-    bottom:10px;
-    left:0;
-    border-radius:8px;
-    box-shadow:5px 8px 10px rgb(0,0,0,0.1);
-}
+        margin-left:0;
+        width:100%;
+        position:relative;
+        bottom:auto;
+        left:auto;
+        border-radius:8px;
+        box-shadow:5px 8px 10px rgb(0,0,0,0.1);
+    }
+
+    .mobile-font{
+        font-size:16px;
+    }
+
+    @media(min-width:768px){
+        .row{
+            flex-direction:row;
+        }
+        .thumbnail-img-1{
+            position:absolute;
+            bottom:10px;
+            left:0;
+            margin-left:100px;
+            width:500px;
+        }
+        .mobile-font{
+            font-size:24px;
+        }
+    }
+
+
 </style>
 <body>
     <div class="hero">
@@ -30,7 +62,6 @@
             <ul>
                 <li><a href='/home/'>Home</a></li>
                 <li><a href='/recipe/'>Recipe</a></li>
-                <li><a href='/book/'>Book</a></li>
                 <li><a href='/contact/'>Contact</a></li>
             </ul>
 
@@ -49,13 +80,16 @@
 
                 <h2 style="font-size:45px; padding-top:20px;">Ingredients:</h2>
                 <ul>
+
                             <div style="padding-top:20px;font-size:24px;">
+                                <div class="mobile-font">
                                 <li>4 slices bacon</li><br>
                                 <li>1 medium onion, chopped (scrubbed clean with a vegetable brush under running water)</li><br>
                                 <li>2 lbs fresh green beans, snapped (gently rubbed under cold running water)</li><br>
                                 <li>8 small new potatoes, halved (scrubbed clean with a vegetable brush under running water)</li><br>
                                 <li>1/8 tsp salt</li><br>
                                 <li>1/8 tsp pepper</li><br>
+                                </div>
                             </div>
                 </ul>
             </div>

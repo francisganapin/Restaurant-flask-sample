@@ -242,6 +242,10 @@ def send_email():
         return jsonify({'email':query_email,'message':query_message,'subject':query_subject})
     return render_template('owner_template/email_send.html')
 
+
+
+
+
 if __name__ == '__main__':
     webbrowser.open("http://127.0.0.1:5000/contact_list/")
     app.run(host='0.0.0.0', port=5000, debug=True)

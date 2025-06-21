@@ -22,7 +22,7 @@ nav{
 }
 
 nav .logo{
-    width:200px;
+    width:100px;
     cursor:pointer;
 }
 
@@ -49,6 +49,7 @@ nav ul li a{
     font-weight:700;
     position: relative;
     padding:10px;
+    font-size:26px;
 }
 
 nav ul li a::before{
@@ -171,6 +172,7 @@ nav ul li a:hover::before{
         padding: 15px 40px;
         font-size: 14px;
         margin-top: 50px;
+        
     }
 
     .input-group {
@@ -191,5 +193,14 @@ nav ul li a:hover::before{
     nav .logo{
         width:150px;
         cursor:pointer;
+    }
+
+    nav ul li a{
+        text-decoration: none;
+        color:#000;
+        font-weight:700;
+        position: relative;
+        padding:10px;
+        font-size:16px;
     }
 }

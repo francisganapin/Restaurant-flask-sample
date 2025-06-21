@@ -1,37 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">  <!-- ✅ Correct linking -->
-   
-</head>
+{% extends 'base_customer.html' %}
 
+{% block title %}Home Page{% endblock %}
 
+{% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">  <!-- ✅ Correct linking -->
 
 <body>
     <div class="hero">
-        <nav>
-            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
-            <ul class="hide_nav"> <!-- hide this nav bar if in the phone -->
-                <li><a href='/home/'>Home</a></li>
-                <li><a href='/recipe/'>Recipe</a></li>
-                <li><a href='/book/'>Book</a></li>
-                <li><a href='/contact/'>Contact</a></li>
-            </ul>
-        </nav>
         <div class="row">
             <div class="col">
                 <h1>“Sunrise Smiles Begin at the Table”</h1>
                 <a id="myBtn">Book Us</a>
             </div>
             <div class="col">
-                <img src="{{ url_for('static', filename='images/pic1.png')}}" class="feature-img">
+                <img src="{{ url_for('static', filename='images/pic1.png')}}" class="feature-img" style="max-width:75%;">
             <div class="pad-top"> <!-- we add top padding here -->
-                <img src="{{ url_for('static', filename='images/pic2.png')}}" class="thumbnail-img">
+                <img src="{{ url_for('static', filename='images/pic2.png')}}" class="thumbnail-img" style="max-width:75%;">
             </div>
             </div>
         </div>
@@ -104,5 +89,6 @@
 
 
 </body>
-</html>
 
+
+{% endblock %}

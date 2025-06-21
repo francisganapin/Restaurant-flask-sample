@@ -3,37 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>recipe</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  <!-- ✅ Correct linking -->
+    <title>Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <style>
+
+    </style>
 </head>
 
-         
 <body>
-    
     <div class="hero">
         <nav>
-            <img src="{{ url_for('static', filename='images/logo.png')}}" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Kitchen Logo">
             <ul>
-                <li><a href='/home/'>Home</a></li>
-                <li><a href='/recipe/'>Recipe</a></li>
-                <li><a href='/book/'>Book</a></li>
-                <li><a href='/contact/'>Contact</a></li>
+                <li><a href="/home/">Home</a></li>
+                <li><a href="/recipe/">Recipe</a></li>
+                <!--<li><a href="/book/">Book</a></li> --> 
+                <li><a href="/contact/">Contact</a></li>
             </ul>
-            </nav>
+        </nav>
     </div>
 
-        
-
-<main>
-    {% block content%} 
-
-    {% endblock %}
-</main>
-
-        
+    <main>
+        {% block content %} 
+        {% endblock %}
+    </main>
 </body>
-        
-
-
 </html>
