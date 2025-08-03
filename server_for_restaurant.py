@@ -232,14 +232,39 @@ def booking_list_archive():
 def send_email():
     if request.method =='POST':
         query_email = request.form.get('query_email')
-        query_message = request.form.get('querry_message')
+        query_message = request.form.get('query_message')
         query_subject = request.form.get('query_subject')
+
+        #this will append our error multiple error handling
+        error_handler = []
+
+
+        if not query_email:
+            error_handler.append('Please provide email')
+        
+        if not query_message:
+            error_handler.append('Please provide Message')
+        
+        if not query_subject:
+            error_handler.append('Please provide subject')
+
+        context = {
+                   'error_handler':error_handler,
+                   'query_email':query_email,
+                   'query_message':query_message,
+                   'query_subject':query_subject
+                   }
+
+        if error_handler:
+            return render_template('owner_template/email_send.html',**context)
+
+        
 
         print(f'Email: {query_email}')
         print(f'Subject: {query_subject}')
         print(f'Message: {query_message}')
         
-        return jsonify({'email':query_email,'message':query_message,'subject':query_subject})
+       
     return render_template('owner_template/email_send.html')
 
 

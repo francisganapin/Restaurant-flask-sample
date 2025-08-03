@@ -1,3 +1,6 @@
+8/03/2025
+	add errorr handler for our restaurant email
+
 5/9/2025
 	add email function and css style on it possible to fast it to other 
 

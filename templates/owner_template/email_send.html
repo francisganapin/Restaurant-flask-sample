@@ -45,43 +45,35 @@
   <form id="emaiForm" method="POST">
       <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" name="query_email" id="email" placeholder="Enter email">
+          <input type="text" class="form-control" name="query_email" id="email" placeholder="Enter email" value="{{ query_email or '' }}">
       </div>
+
+        {% if error_handler %}
+        <p style="color:red;">{{ error_handler[0] }}</p>
+        {% endif %}
 
       <div class="form-group">
           <label for="subject">Subject</label>
-          <input type="text" class="form-control" name="query_subject" id="subject" placeholder="Enter subject">
+          <input type="text" class="form-control" name="query_subject" id="subject" placeholder="Enter subject" value="{{ query_subject or '' }}">
       </div>  
+
+        {% if error_handler %}
+        <p style="color:red;">{{ error_handler[1] }}</p>
+        {% endif %}
 
       <div class="form-group">
           <label for="message">Message</label>
-          <textarea class="form-control" name="querry_message" id="message" rows="4" placeholder="Enter your message"></textarea>
+          <textarea class="form-control" name="query_message" id="message" rows="4" placeholder="Enter your message">{{ query_message or '' }}</textarea>
       </div>
+
+      {% if error_handler %}
+      <p style="color:red;">{{ error_handler[2] }}</p>
+      {% endif %}
 
       <button class="btn btn-primary"  type="submit">Submit</button>
   </form>
 </div>
 
-<script>
-    document.getElementById('emaiForm').addEventListener('submit',async function (e){
-      e.preventDefault();
-
-      const form = e.target;
-      const formData = new FormData(form);
-      
-      const response = await fetch('/email/send/',{
-        method:'POST',
-        body:formData
-      });
-
-      const result = await response.json();
-      console.log(`Server response:` ,result);
-
-      form.reset();
-    });
-  
-
-</script>
 
 {% endblock %}
 
