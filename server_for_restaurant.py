@@ -236,17 +236,17 @@ def send_email():
         query_subject = request.form.get('query_subject')
 
         #this will append our error multiple error handling
-        error_handler = []
+        error_handler = {}
 
 
         if not query_email:
-            error_handler.append('Please provide email')
+            error_handler['email'] = 'Please provide email'
         
         if not query_message:
-            error_handler.append('Please provide Message')
+            error_handler['message'] = 'Please provide Message'
         
         if not query_subject:
-            error_handler.append('Please provide subject')
+            error_handler['subject'] = 'Please provide subject'
 
         context = {
                    'error_handler':error_handler,
@@ -257,12 +257,14 @@ def send_email():
 
         if error_handler:
             return render_template('owner_template/email_send.html',**context)
-
+        else:
+            print(f'Email: {query_email}')
+            print(f'Subject: {query_subject}')
+            print(f'Message: {query_message}')
+            return render_template('owner_template/email_send.html',success_message=f'Email was Sent into {query_email}')
         
 
-        print(f'Email: {query_email}')
-        print(f'Subject: {query_subject}')
-        print(f'Message: {query_message}')
+        
         
        
     return render_template('owner_template/email_send.html')
