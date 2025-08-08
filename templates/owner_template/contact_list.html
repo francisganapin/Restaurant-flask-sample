@@ -91,10 +91,10 @@
     <!-- Pagination -->
     <div class="d-flex justify-content-center my-3">
       {% if contact_list_data.has_prev %}
-      <a class="btn btn-outline-primary mx-2" href="{{ url_for('booking_list', page=contact_list_data.prev_num) }}">Previous</a>
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('contact_list', page=contact_list_data.prev_num) }}">Previous</a>
       {% endif %}
       {% if contact_list_data.has_next %}
-      <a class="btn btn-outline-primary mx-2" href="{{ url_for('booking_list', page=contact_list_data.next_num) }}">Next</a>
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('contact_list', page=contact_list_data.next_num) }}">Next</a>
       {% endif %}
     </div>
 
@@ -110,7 +110,7 @@
           </div>
           <div class="modal-body">
               
-              <form action="{{ url_for('booking_list_archive') }}" method="POST">
+              <form action="{{ url_for('contact_list_archive') }}" method="POST">
                 <div class="input-group mb-3">
                   <input type="number" name="query_id" class="form-control" placeholder="ID" aria-label="Archive ID" required>
                   <!-- FIX: type="submit" instead of "button" -->

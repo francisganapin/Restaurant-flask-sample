@@ -1,0 +1,83 @@
+
+{% extends "base_owner.html" %}
+
+{% block title %}Contact Page{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+ 
+
+<body style="background-color:#789a5f;">
+
+  <div class="container">
+
+    <!-- Archive Modal Trigger -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Archive
+    </button>
+
+    <!-- Search Form -->
+    <div class="display_form">
+      <form action="/expense_list/" method="POST" class="form-container">
+        {{ message }}
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="query_name">
+        </div>
+        <button type="submit" class="submit-btn">Search</button>
+      </form>
+    </div>
+
+    <!-- Table -->
+    <div class="table_div">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in expense_list %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.date }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="8" style="text-align: center; font-weight: bold; color: red;">No Data Found</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center my-3">
+      {% if expense_list.has_prev %}
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('expense_list', page=expense_list.prev_num) }}">Previous</a>
+      {% endif %}
+      {% if expense_list.has_next %}
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('expense_list', page=expense_list.next_num) }}">Next</a>
+      {% endif %}
+    </div>
+
+  </div>
+
+
+</body>
+{% endblock %}
+

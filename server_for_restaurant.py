@@ -90,6 +90,14 @@ class Order(db.Model):
     order_date = db.Column(db.String(100),nullable=False)
 
 
+
+class Expense(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100),nullable=False)
+    amount = db.Column(db.Float,nullable=False)
+    date = db.Column(db.Date)
+
+
 # Ensure the database is created
 with app.app_context():
     db.create_all()
@@ -107,20 +115,31 @@ def register_customer():
 
 @app.route('/food_stock/',methods=['GET','POST'])
 def food_list():
-    stock_list_data = Food_stock.query.all()
+  
 
-    if request.method == 'POST':
-        query_name = request.form.get('query_name')
-        query_category = request.form.get('query_category')
+    page = request.args.get('page',1,type=int)
 
-        if query_name:
-           stock_list_data = Food_stock.query.filter(Food_stock.name.ilike(f"%{query_name}%")).all()
 
-        if query_category:
-            if 'All' not in query_category:
-                stock_list_data = Food_stock.query.filter(Food_stock.category == query_category).all()
+    query_name = request.form.get('query_name')
+    query_category = request.form.get('query_category')
 
-    return render_template('owner_template/food_list.html',stock_list=stock_list_data)
+    query = Food_stock.query
+
+    if query_name:
+        query = query.filter(Food_stock.name.ilike(f"%{query_name}%"))
+
+    if query_category and query_category != 'All':
+        query = query.filter(Food_stock.category == query_category)
+
+    stock_list_data = query.paginate(page=page, per_page=6, error_out=False)
+
+    context = {
+        "stock_list": stock_list_data,
+        "query_name": query_name,
+        "query_category": query_category
+    }
+
+    return render_template('owner_template/food_list.html',**context)
 
 
 # add front end message handler  4/9/2025
@@ -177,7 +196,7 @@ def update_food_stock(id):
     return redirect(url_for('food_list',message=message))
 
 @app.route('/contact_list/', methods=['GET', 'POST'])
-def booking_list():
+def contact_list():
     
     # set the page where we at
     page = request.args.get('page',1,type=int) 
@@ -216,7 +235,7 @@ def booking_list():
 
 
 @app.route('/contact_list/archive/',methods=['GET','POST'])
-def booking_list_archive():
+def contact_list_archive():
     
     if request.method == 'POST':
         query_id = request.form.get('query_id')
@@ -224,7 +243,7 @@ def booking_list_archive():
         ContactTb.query.filter_by(id=query_id).update({'is_archive':True})
         db.session.commit()
 
-    return redirect(url_for('booking_list'))
+    return redirect(url_for('contact_list'))
 
 
 
@@ -270,6 +289,23 @@ def send_email():
     return render_template('owner_template/email_send.html')
 
 
+@app.route('/expense_list/',methods=['GET','POST'])
+def expense_list():
+    expense_list_data = Expense.query.all()
+
+     
+    # set the page where we at
+    page = request.args.get('page',1,type=int) 
+    # only show archive contact
+    query = Expense.query.all()
+
+    if request.method == 'POST':
+        query_name = request.form.get('query_name')
+
+    
+    
+
+    return render_template('owner_template/expense_list.html',expense_list=expense_list_data)
 
 
 

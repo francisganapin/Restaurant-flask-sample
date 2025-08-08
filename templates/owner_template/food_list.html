@@ -51,7 +51,7 @@
                         <option value="Grain">Grain</option>
                         <option value="Meat">Meat</option>
                         <option value="Seafood">Seafood</option>
-                        <option value="Vegetable">Vegetable</option>
+                        <option value="Vegetables">Vegetable</option>
 
                     </select>
                 </div>
@@ -75,7 +75,7 @@
                     {% for item in stock_list %}
                     <tr>
                       
-                        <td>{{ loop.index }}</td>
+                        <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.category }}</td>
                         <td>{{ item.quantity }}</td>
@@ -198,14 +198,14 @@
     </div>
   </div>
 
-
-{% if stock_list.has_prev %}
-    <a href="{{ url_for('food_list', page=stock_list.prev_num) }}">Previous</a>
-{% endif %}
-
-{% if stock_list.has_next %}
-    <a href="{{ url_for('food_list', page=stock_list.next_num) }}">Next</a>
-{% endif %}
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center my-3">
+      {% if stock_list.has_prev %}
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('food_list', page=stock_list.prev_num) }}">Previous</a>
+      {% endif %}
+      {% if stock_list.has_next %}
+      <a class="btn btn-outline-primary mx-2" href="{{ url_for('food_list', page=stock_list.next_num) }}">Next</a>
+      {% endif %}
     </div>
 
 
